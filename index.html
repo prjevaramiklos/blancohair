@@ -1,715 +1,89 @@
-<!DOCTYPE html>
-<html lang="hu">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blanco Hair Salon - Zalaegerszeg</title>
-    <!-- Google Fonts a letisztult tipográfiáért -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <style>
-        /* --- Alapstílusok & Finomhangolt Színpaletta a Logó alapján --- */
-        :root {
-            --bg-color: #fbfaf7;          /* Lágy krémszínű háttér */
-            --surface-color: #f1ede6;     /* Sötétebb krém/bézs a szekcióknak és a fejlécnek */
-            --text-main: #2d3330;          /* Mély, majdnem fekete zöldes-szürke tónus */
-            --text-muted: #5c6360;        /* Tompított szürkészöld */
-            --accent-gold: #c3a875;       /* Elegáns arany kiemelés */
-            --accent-mint: #9ec3b1;       /* Logó ihlette menta szín */
-            --accent-dark-green: #255848; /* Logó ihlette mélyzöld a gombokhoz */
-            --white: #ffffff;
-            --font-title: 'Playfair Display', serif;
-            --font-body: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;     /* Finom, lágy görgetés az egész oldalon */
-        }
-
-        body {
-            font-family: var(--font-body);
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        /* --- Navigáció / Fejléc (VÉKONYÍTVA) --- */
-        header {
-            padding: 10px 0;              /* Mobilon kisebb függőleges térköz a vékonyabb fejlécért */
-            background-color: var(--surface-color); 
-            border-bottom: 1px solid rgba(195, 168, 117, 0.3); 
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-block {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .logo-img {
-            max-height: 42px;             /* Mobilon kicsit kisebb logó, hogy kényelmesen elférjen */
-            width: auto;
-            height: auto;
-            border-radius: 8px;
-            transition: max-height 0.3s ease;
-        }
-
-        .logo-text {
-            font-family: var(--font-body);
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--text-main);
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-        }
-
-        .header-cta-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .link-facebook-header {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-main);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            padding: 6px;
-        }
-
-        .link-facebook-header:hover {
-            color: var(--accent-dark-green);
-        }
-
-        .link-facebook-header svg {
-            fill: currentColor;
-            transition: fill 0.3s ease;
-        }
-
-        .btn-header {
-            padding: 8px 14px;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border-radius: 2px;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .btn-header-primary {
-            background-color: var(--accent-dark-green);
-            color: var(--white);
-            border: 1px solid var(--accent-dark-green);
-        }
-
-        .btn-header-primary:hover {
-            background-color: var(--text-main);
-            border-color: var(--text-main);
-        }
-
-        .btn-header-secondary {
-            background-color: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--accent-gold);
-        }
-
-        .btn-header-secondary:hover {
-            background-color: rgba(195, 168, 117, 0.1);
-        }
-
-        /* --- Hero Szekció Képpel --- */
-        .hero {
-            padding: 50px 0 60px 0;
-        }
-
-        .hero-grid {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-            text-align: center;
-        }
-
-        .hero-image-wrapper {
-            width: 100%;
-            max-width: 320px;
-        }
-
-        .profile-img {
-            width: 100%;
-            height: auto;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(45, 51, 48, 0.1);
-            border: 1px solid rgba(195, 168, 117, 0.2);
-        }
-
-        .hero-content {
-            flex: 1;
-        }
-
-        .badge {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--accent-gold);
-            font-weight: 600;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        h1 {
-            font-family: var(--font-title);
-            font-size: 36px;
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 24px;
-            color: var(--text-main);
-        }
-
-        .hero p {
-            font-size: 16px;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            font-weight: 300;
-        }
-
-        /* --- CTA Gombok Alapstílusai --- */
-        .cta-group {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .gallery-cta-group {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 36px;
-            font-size: 15px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            width: 100%;
-            max-width: 280px;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-dark-green);
-            color: var(--white);
-            border: 1px solid var(--accent-dark-green);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--text-main);
-            border-color: var(--text-main);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--accent-gold);
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(195, 168, 117, 0.1);
-        }
-
-        /* --- GALÉRIA SZEKCIÓ --- */
-        .gallery-section {
-            padding: 60px 0;
-            background-color: var(--surface-color);
-        }
-
-        .section-title {
-            font-family: var(--font-title);
-            font-size: 32px;
-            text-align: center;
-            margin-bottom: 12px;
-            font-weight: 400;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 15px;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            font-weight: 300;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 20px;
-        }
-
-        .slider-container {
-            position: relative;
-            width: 100%;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 45px; 
-            overflow: hidden;         
-        }
-
-        .slider-clip {
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .slider-wrapper {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .slide {
-            min-width: 100%;
-            padding: 0 10px;
-            box-sizing: border-box;
-        }
-
-        .image-box {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            background-color: #e5dec4;
-        }
-
-        .image-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .slider-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.95);
-            border: none;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            z-index: 10;
-            border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .slider-arrow:hover {
-            background-color: var(--accent-dark-green);
-            color: var(--white);
-        }
-
-        .arrow-left { left: 0px; }
-        .arrow-right { right: 0px; }
-
-        .slider-dots {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 24px;
-            margin-bottom: 40px; 
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            background-color: #c8c2bc;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .dot.active {
-            background-color: var(--accent-dark-green);
-        }
-
-        /* --- Térkép szekció --- */
-        .map-section {
-            padding: 60px 0 20px 0;
-            text-align: center;
-        }
-
-        .map-wrapper {
-            width: 100%;
-            max-width: 800px; 
-            margin: 0 auto;
-            border-radius: 4px; 
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(45, 51, 48, 0.08); 
-            border: 1px solid rgba(195, 168, 117, 0.2);
-        }
-
-        .map-wrapper iframe {
-            width: 100% !important; 
-            height: 350px !important; 
-            display: block;
-        }
-
-        /* --- Információk / Kapcsolat --- */
-        .info-section {
-            padding: 40px 0 80px 0; 
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-            text-align: center;
-        }
-
-        .info-card {
-            padding: 24px;
-        }
-
-        .info-card h2 {
-            font-family: var(--font-title);
-            font-size: 20px;
-            margin-bottom: 12px;
-            font-weight: 600;
-            color: var(--accent-gold);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .info-card p, .info-card a {
-            font-size: 16px;
-            color: var(--text-main);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .info-card a:hover {
-            color: var(--accent-dark-green);
-        }
-
-        /* --- Lábléc --- */
-        footer {
-            background-color: var(--text-main);
-            color: var(--accent-mint);
-            padding: 40px 0;
-            text-align: center;
-            font-size: 13px;
-            letter-spacing: 1px;
-        }
-
-        .footer-social {
-            margin-bottom: 16px;
-        }
-
-        .link-facebook-footer {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--accent-mint);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        .link-facebook-footer:hover {
-            color: var(--accent-gold);
-        }
-
-        .link-facebook-footer svg {
-            fill: currentColor;
-            transition: fill 0.3s ease;
-        }
-
-        /* --- Reszponzív Képernyő Finomhangolások --- */
-        @media (max-width: 480px) {
-            .logo-text {
-                display: none; 
-            }
-            .map-wrapper iframe {
-                height: 280px !important; 
-            }
-            .header-cta-group {
-                gap: 8px; 
-            }
-        }
-
-        @media (min-width: 768px) {
-            header { padding: 12px 0; }  /* Nagyobb képernyőn is kecsesebb, 20px-ről 12px-re csökkentve */
-            .logo-img { max-height: 52px; } /* Asztali gépen is finomabb logó méret */
-            .logo-text { font-size: 22px; letter-spacing: 1px; }
-            .header-cta-group { gap: 16px; }
-            .btn-header { padding: 10px 20px; font-size: 12px; }
-            
-            /* Kétoszlopos elrendezés asztali gépen */
-            .hero { padding: 100px 0 80px 0; }
-            .hero-grid {
-                flex-direction: row;
-                text-align: left;
-                gap: 60px;
-            }
-            .hero-image-wrapper {
-                max-width: 360px;
-            }
-            h1 { font-size: 48px; }
-            
-            .cta-group { 
-                justify-content: flex-start;
-                flex-direction: row; 
-            }
-
-            .gallery-cta-group {
-                justify-content: center;
-                flex-direction: row;
-            }
-            
-            .slide { min-width: 33.3333%; }
-            
-            .info-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- FEJLÉC -->
-    <header>
-        <div class="container nav-container">
-            <a href="#" class="logo-block">
-                <img src="logo.jpeg" alt="Blanco Hair Salon Logo" class="logo-img">
-                <span class="logo-text">Blanco Hair Salon</span>
-            </a>
-            
-            <div class="header-cta-group">
-                <a href="https://www.facebook.com/profile.php?id=61576194103543" target="_blank" class="link-facebook-header" title="Blanco Hair Salon Facebook">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg>
-                </a>
-                <a href="tel:+36702856630" class="btn-header btn-header-secondary">Hívás</a>
-                <a href="https://calendar.app.google/SshjMRivNZE564hw7" target="_blank" class="btn-header btn-header-primary">Időpontfoglalás</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- HERO / BEMUTATKOZÁS TULAJDONOSI FOTÓVAL -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-grid">
-                <div class="hero-image-wrapper">
-                    <img src="profil.jpg" alt="Blanka - Blanco Hair Salon" class="profile-img">
-                </div>
-                <div class="hero-content" id="scrolled-target">
-                    <span class="badge">Blanco Hair Salon</span>
-                    <h1>Magabiztos mosoly,<br>egészséges haj.</h1>
-                    <p>Sziasztok! Blanka vagyok és a küldetésem, hogy minden vendégem magabiztos mosollyal lépjen ki az ajtómon. Nálam a precíz hajvágás, a személyre szabott formák és a hajad valódi egészsége áll a középpontban, hogy a frizurád mindennap ragyogó legyen.</p>
-                    
-                    <div class="cta-group">
-                        <a href="https://calendar.app.google/SshjMRivNZE564hw7" target="_blank" class="btn btn-primary">Időpontfoglalás</a>
-                        <a href="tel:+36702856630" class="btn btn-secondary">Hívás: 70/285-66-30</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- GALÉRIA -->
-    <section class="gallery-section">
-        <h2 class="section-title">Munkáim</h2>
-        <p class="section-subtitle">Büszkeségeim a szalonból. Egészséges, stílusos és megújult frizurák. Inspirálódj belőlük a következő találkozásunk előtt!</p>
-        
-        <div class="slider-container">
-            <button class="slider-arrow arrow-left" id="prevBtn">&#10094;</button>
-            <button class="slider-arrow arrow-right" id="nextBtn">&#10095;</button>
-            
-            <div class="slider-clip">
-                <div class="slider-wrapper" id="sliderWrapper">
-                    <div class="slide"><div class="image-box"><img src="kep1.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>
-                    <div class="slide"><div class="image-box"><img src="kep2.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>
-                    <div class="slide"><div class="image-box"><img src="kep3.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>
-                    <div class="slide"><div class="image-box"><img src="kep4.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>
-                    <div class="slide"><div class="image-box"><img src="kep5.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>
-                    <div class="slide"><div class="image-box"><img src="kep6.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>
-                    <div class="slide"><div class="image-box"><img src="kep7.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>
-                    <div class="slide"><div class="image-box"><img src="kep8.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>
-                </div>
-            </div>
-            
-            <div class="slider-dots" id="sliderDots"></div>
-        </div>
-
-        <div class="container">
-            <div class="gallery-cta-group">
-                <a href="https://calendar.app.google/SshjMRivNZE564hw7" target="_blank" class="btn btn-primary">Időpontfoglalás</a>
-                <a href="tel:+36702856630" class="btn btn-secondary">Hívás: 70/285-66-30</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- TÉRKÉP -->
-    <section class="map-section">
-        <div class="container">
-            <div class="map-wrapper">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2729.4357738221844!2d16.830604176882203!3d46.84501254026528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47692caf9b92ed5f%3A0x6b40bd708451bcba!2sZalaegerszeg%2C%20Ola%20u.%204%2C%208900!5e0!3m2!1shu!2shu!4v1716900000000!5m2!1shu!2shu" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </div>
-    </section>
-
-    <!-- INFORMÁCIÓK -->
-    <section class="info-section">
-        <div class="container">
-            <div class="info-grid">
-                <div class="info-card">
-                    <h2>Üzletünk</h2>
-                    <p>8900 Zalaegerszeg,<br>Ola utca 4.</p>
-                </div>
-                <div class="info-card">
-                    <h2>Kapcsolat</h2>
-                    <p><a href="tel:+36702856630">70/285-66-30</a></p>
-                    <p><a href="mailto:blanka.osi@gmail.com">blanka.osi@gmail.com</a></p>
-                </div>
-                <div class="info-card">
-                    <h2>Nyitvatartás</h2>
-                    <p>Bejelentkezés alapján<br>a fenti gombra kattintva.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- LÁBLÉC -->
-    <footer>
-        <div class="container">
-            <div class="footer-social">
-                <a href="https://www.facebook.com/profile.php?id=61576194103543" target="_blank" class="link-facebook-footer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg>
-                    Kövess minket Facebookon
-                </a>
-            </div>
-            <p>&copy; 2026 Blanco Hair Salon. Minden jog fenntartva.</p>
-        </div>
-    </footer>
-
-    <!-- JAVASCRIPT LOGIKA -->
-    <script>
-        const wrapper = document.getElementById('sliderWrapper');
-        const slides = document.querySelectorAll('.slide');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const dotsContainer = document.getElementById('sliderDots');
-        
-        let currentIndex = 0;
-        let slidesToShow = window.innerWidth >= 768 ? 3 : 1;
-        let maxIndex = slides.length - slidesToShow;
-
-        // Automatikus görgetés csak mobilon a betöltődés után
-        window.addEventListener('DOMContentLoaded', () => {
-            if (window.innerWidth < 768) {
-                const target = document.getElementById('scrolled-target');
-                if (target) {
-                    setTimeout(() => {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 300);
-                }
-            }
-        });
-
-        window.addEventListener('resize', () => {
-            slidesToShow = window.innerWidth >= 768 ? 3 : 1;
-            maxIndex = slides.length - slidesToShow;
-            if(currentIndex > maxIndex) currentIndex = maxIndex;
-            updateSlider();
-            createDots();
-        });
-
-        function createDots() {
-            dotsContainer.innerHTML = '';
-            const totalDots = window.innerWidth >= 768 ? Math.ceil(slides.length / 3) : slides.length;
-            
-            for (let i = 0; i < totalDots; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('dot');
-                if (i === 0) dot.classList.add('active');
-                dot.addEventListener('click', () => {
-                    currentIndex = window.innerWidth >= 768 ? i * 3 : i;
-                    if(currentIndex > maxIndex) currentIndex = maxIndex;
-                    updateSlider();
-                });
-                dotsContainer.appendChild(dot);
-            }
-        }
-
-        function updateSlider() {
-            const percent = currentIndex * (100 / slidesToShow);
-            wrapper.style.transform = `translateX(-${percent}%)`;
-            
-            const dots = document.querySelectorAll('.dot');
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            const activeDotIndex = window.innerWidth >= 768 ? Math.floor(currentIndex / 3) : currentIndex;
-            if(dots[activeDotIndex]) dots[activeDotIndex].classList.add('active');
-        }
-
-        nextBtn.addEventListener('click', () => {
-            if (currentIndex < maxIndex) {
-                currentIndex += window.innerWidth >= 768 ? 3 : 1;
-                if(currentIndex > maxIndex) currentIndex = maxIndex;
-            } else {
-                currentIndex = 0;
-            }
-            updateSlider();
-        });
-
-        prevBtn.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex -= window.innerWidth >= 768 ? 3 : 1;
-                if(currentIndex < 0) currentIndex = 0;
-            } else {
-                currentIndex = maxIndex;
-            }
-            updateSlider();
-        });
-
-        createDots();
-    </script>
-</body>
-</html>
+<!DOCTYPE html><html lang="hu"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Blanco Hair Salon - Zalaegerszeg</title>    <link rel="preconnect" href="https://fonts.googleapis.com">    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">        <style>        /* --- Alapstílusok & BioHair ihlette modern szalon színpaletta --- */        :root {            --bg-color: #ffffff;          /* Tiszta fehér, modern háttér */            --surface-color: #f4f9f6;     /* Nagyon lágy, prémium zöldes-szürke szekcióháttér */            --text-main: #1e2522;          /* Mély szürkészöld, prémium sötét tónus */            --text-muted: #55635c;        /* Elegáns, tompított középszürke a leírásoknak */            --accent-green: #008753;      /* BioHair ihlette élénk, egészséges zöld */            --accent-green-hover: #005c38;/* Mélyzöld a gombok interakcióihoz */            --accent-soft-green: #e6f3ed; /* Lágy zöld háttér kiemelésekhez */            --white: #ffffff;            --font-title: 'Playfair Display', serif;            --font-body: 'Plus Jakarta Sans', sans-serif;        }
+        * {            box-sizing: border-box;            margin: 0;            padding: 0;            scroll-behavior: smooth;     /* Finom, lágy görgetés az egész oldalon */        }
+        body {            font-family: var(--font-body);            background-color: var(--bg-color);            color: var(--text-main);            line-height: 1.6;            -webkit-font-smoothing: antialiased;        }
+        .container {            width: 100%;            max-width: 1100px;            margin: 0 auto;            padding: 0 24px;        }
+        img {            max-width: 100%;            display: block;        }
+        /* --- Navigáció / Fejléc --- */        header {            padding: 14px 0;                         background-color: var(--white);             border-bottom: 1px solid rgba(0, 135, 83, 0.15);             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);        }
+        .nav-container {            display: flex;            justify-content: space-between;            align-items: center;        }
+        .logo-block {            display: flex;            align-items: center;            gap: 12px;            text-decoration: none;        }
+        .logo-img {            max-height: 42px;                         width: auto;            height: auto;            border-radius: 8px;            transition: max-height 0.3s ease;        }
+        .logo-text {            font-family: var(--font-body);            font-size: 18px;            font-weight: 600;            color: var(--text-main);            letter-spacing: 0.5px;            white-space: nowrap;        }
+        .header-cta-group {            display: flex;            align-items: center;            gap: 12px;        }
+        .link-facebook-header {            display: inline-flex;            align-items: center;            justify-content: center;            color: var(--text-muted);            text-decoration: none;            transition: color 0.3s ease;            padding: 6px;        }
+        .link-facebook-header:hover {            color: var(--accent-green);        }
+        .link-facebook-header svg {            fill: currentColor;            transition: fill 0.3s ease;        }
+        .btn-header {            padding: 10px 18px;            font-size: 11px;            font-weight: 600;            letter-spacing: 1px;            text-transform: uppercase;            text-decoration: none;            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);            border-radius: 50px;             text-align: center;            white-space: nowrap;        }
+        .btn-header-primary {            background-color: var(--accent-green);            color: var(--white);            border: 1px solid var(--accent-green);            box-shadow: 0 2px 8px rgba(0, 135, 83, 0.2);        }
+        .btn-header-primary:hover {            background-color: var(--accent-green-hover);            border-color: var(--accent-green-hover);            transform: translateY(-1px);        }
+        .btn-header-secondary {            background-color: transparent;            color: var(--text-main);            border: 1px solid rgba(0, 135, 83, 0.4);        }
+        .btn-header-secondary:hover {            background-color: var(--accent-soft-green);            border-color: var(--accent-green);            color: var(--accent-green-hover);        }
+        /* --- Hero Szekció Képpel --- */        .hero {            padding: 60px 0 70px 0;            background: linear-gradient(180deg, var(--white) 0%, var(--surface-color) 100%);        }
+        .hero-grid {            display: flex;            flex-direction: column;            align-items: center;            gap: 40px;            text-align: center;        }
+        .hero-image-wrapper {            width: 100%;            max-width: 320px;            position: relative;        }
+        .profile-img {            width: 100%;            height: auto;            border-radius: 24px;            box-shadow: 0 15px 35px rgba(0, 87, 83, 0.1);            border: 2px solid var(--white);        }
+        .hero-content {            flex: 1;        }
+        .badge {            font-size: 11px;            text-transform: uppercase;            letter-spacing: 3px;            color: var(--accent-green);            font-weight: 700;            margin-bottom: 20px;            display: inline-block;            background-color: var(--accent-soft-green);            padding: 4px 12px;            border-radius: 50px;        }
+        h1 {            font-family: var(--font-title);            font-size: 38px;            font-weight: 400;            line-height: 1.25;            margin-bottom: 24px;            color: var(--text-main);        }
+        .hero p {            font-size: 16px;            color: var(--text-muted);            margin-bottom: 40px;            font-weight: 400;        }
+        /* --- CTA Gombok Alapstílusai --- */        .cta-group, .gallery-cta-group {            display: flex;            flex-direction: column;            gap: 16px;            align-items: center;            justify-content: center;        }
+        .btn {            display: inline-flex;            align-items: center;            justify-content: center;            padding: 16px 36px;            font-size: 14px;            font-weight: 600;            letter-spacing: 1px;            text-transform: uppercase;            text-decoration: none;            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);            width: 100%;            max-width: 280px;            border-radius: 50px;        }
+        .btn-primary {            background-color: var(--accent-green);            color: var(--white);            border: 1px solid var(--accent-green);            box-shadow: 0 4px 15px rgba(0, 135, 83, 0.3);        }
+        .btn-primary:hover {            background-color: var(--accent-green-hover);            border-color: var(--accent-green-hover);            transform: translateY(-2px);            box-shadow: 0 6px 20px rgba(0, 135, 83, 0.4);        }
+        .btn-secondary {            background-color: var(--white);            color: var(--text-main);            border: 1px solid rgba(0, 135, 83, 0.4);            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);        }
+        .btn-secondary:hover {            background-color: var(--accent-soft-green);            border-color: var(--accent-green);            color: var(--accent-green-hover);            transform: translateY(-2px);        }
+        /* --- GALÉRIA SZEKCIÓ --- */        .gallery-section {            padding: 80px 0;            background-color: var(--surface-color);            border-top: 1px solid rgba(0, 135, 83, 0.05);            border-bottom: 1px solid rgba(0, 135, 83, 0.05);        }
+        .section-title {            font-family: var(--font-title);            font-size: 34px;            text-align: center;            margin-bottom: 12px;            font-weight: 400;            color: var(--text-main);        }
+        .section-subtitle {            text-align: center;            font-size: 15px;            color: var(--text-muted);            margin-bottom: 40px;            font-weight: 400;            max-width: 600px;            margin-left: auto;            margin-right: auto;            padding: 0 20px;        }
+        .slider-container {            position: relative;            width: 100%;            max-width: 1100px;            margin: 0 auto;            padding: 0 45px;             overflow: hidden;                 }
+        .slider-clip {            width: 100%;            overflow: hidden;            border-radius: 16px;        }
+        .slider-wrapper {            display: flex;            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);        }
+        .slide {            min-width: 100%;            padding: 0 10px;            box-sizing: border-box;            transition: min-width 0.3s ease;        }
+        .image-box {            width: 100%;            aspect-ratio: 1 / 1;            overflow: hidden;            box-shadow: 0 6px 20px rgba(0, 87, 83, 0.06);            background-color: #eaf2ee;            border-radius: 12px;        }
+        .image-box img {            width: 100%;            height: 100%;            object-fit: cover;            transition: transform 0.5s ease;        }
+        .image-box:hover img {            transform: scale(1.04);        }
+        .slider-arrow {            position: absolute;            top: 50%;            transform: translateY(-50%);            background-color: var(--white);            color: var(--text-main);            border: none;            width: 44px;            height: 44px;            cursor: pointer;            display: flex;            align-items: center;            justify-content: center;            font-size: 16px;            transition: all 0.3s ease;            z-index: 10;            border-radius: 50%;            box-shadow: 0 4px 12px rgba(0,0,0,0.08);        }
+        .slider-arrow:hover {            background-color: var(--accent-green);            color: var(--white);            transform: translateY(-50%) scale(1.05);        }
+        .arrow-left { left: 0px; }        .arrow-right { right: 0px; }
+        .slider-dots {            display: flex;            justify-content: center;            gap: 8px;            margin-top: 28px;            margin-bottom: 40px;         }
+        .dot {            width: 8px;            height: 8px;            background-color: #cbdad2;            border-radius: 50%;            cursor: pointer;            transition: all 0.3s ease;        }
+        .dot.active {            background-color: var(--accent-green);            width: 20px;            border-radius: 4px;        }
+        /* --- Térkép szekció --- */        .map-section {            padding: 80px 0 20px 0;            text-align: center;            background-color: var(--white);        }
+        .map-wrapper {            width: 100%;            max-width: 800px;             margin: 0 auto;            border-radius: 16px;             overflow: hidden;            box-shadow: 0 12px 30px rgba(0, 87, 83, 0.08);             border: 1px solid rgba(0, 135, 83, 0.1);        }
+        .map-wrapper iframe {            width: 100% !important;             height: 350px !important;             display: block;        }
+        /* --- Információk / Kapcsolat --- */        .info-section {            padding: 50px 0 90px 0;            background-color: var(--white);         }
+        .info-grid {            display: grid;            grid-template-columns: 1fr;            gap: 40px;            text-align: center;        }
+        .info-card {            padding: 30px 24px;            background-color: var(--surface-color);            border-radius: 16px;            border: 1px solid rgba(0, 135, 83, 0.05);            transition: transform 0.3s ease;        }
+        .info-card:hover {            transform: translateY(-3px);        }
+        .info-card h2 {            font-family: var(--font-body);            font-size: 16px;            margin-bottom: 14px;            font-weight: 700;            color: var(--accent-green);            text-transform: uppercase;            letter-spacing: 1.5px;        }
+        .info-card p, .info-card a {            font-size: 16px;            color: var(--text-main);            text-decoration: none;            transition: color 0.3s;            font-weight: 500;        }
+        .info-card a:hover {            color: var(--accent-green-hover);            text-decoration: underline;        }
+        /* --- Lábléc --- */        footer {            background-color: #161b19;            color: #a3c7b8;            padding: 40px 0;            text-align: center;            font-size: 13px;            letter-spacing: 1px;            border-top: 3px solid var(--accent-green);        }
+        .footer-social {            margin-bottom: 16px;        }
+        .link-facebook-footer {            display: inline-flex;            align-items: center;            gap: 8px;            color: #a3c7b8;            text-decoration: none;            font-weight: 500;            font-size: 14px;            transition: color 0.3s ease;        }
+        .link-facebook-footer:hover {            color: var(--white);        }
+        .link-facebook-footer svg {            fill: currentColor;            transition: fill 0.3s ease;        }
+        /* --- Reszponzív Képernyő Finomhangolások --- */        @media (max-width: 480px) {            .logo-text {                display: none;             }            .map-wrapper iframe {                height: 280px !important;             }            .header-cta-group {                gap: 8px;             }        }
+        @media (min-width: 768px) {            header { padding: 14px 0; }              .logo-img { max-height: 52px; }             .logo-text { font-size: 22px; letter-spacing: 1px; }            .header-cta-group { gap: 16px; }            .btn-header { padding: 10px 22px; font-size: 12px; }                        .hero { padding: 100px 0 110px 0; }            .hero-grid {                flex-direction: row;                text-align: left;                gap: 60px;            }            .hero-image-wrapper {                max-width: 360px;            }            h1 { font-size: 52px; }                        .cta-group {                 justify-content: flex-start;                flex-direction: row;             }
+            .gallery-cta-group {                justify-content: center;                flex-direction: row;            }                        .slide { min-width: 33.3333%; }                        .info-grid {                grid-template-columns: repeat(3, 1fr);            }        }    </style></head><body>
+    <header>        <div class="container nav-container">            <a href="#" class="logo-block">                <img src="logo.jpeg" alt="Blanco Hair Salon Logo" class="logo-img">                <span class="logo-text">Blanco Hair Salon</span>            </a>                        <div class="header-cta-group">                <a href="https://www.facebook.com/profile.php?id=61576194103543" target="_blank" class="link-facebook-header" title="Blanco Hair Salon Facebook">                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg>                </a>                <a href="tel:+36702856630" class="btn-header btn-header-secondary">Hívás</a>                <a href="https://calendar.app.google/SshjMRivNZE564hw7" target="_blank" class="btn-header btn-header-primary">Időpontfoglalás</a>            </div>        </div>    </header>
+    <section class="hero">        <div class="container">            <div class="hero-grid">                <div class="hero-image-wrapper">                    <img src="profil.jpg" alt="Blanka - Blanco Hair Salon" class="profile-img">                </div>                <div class="hero-content" id="scrolled-target">                    <span class="badge">Blanco Hair Salon</span>                    <h1>Magabiztos mosoly,<br>egészséges haj.</h1>                    <p>Hidvégi-Ősi Blanka vagyok, fodrász. Imádom a kreatív kihívásokat! Legyen szó dögös bubifrizuráról, napsütötte balayage festésről vagy vagány férfi fazonról, én segítek. Nálam a laza hangulat profi munkával párosul. Hozd el az inspirációs képedet, vagy bízd rám magad! Hozzuk ki a legtöbbet a hajadból.</p>                                        <div class="cta-group">                        <a href="https://calendar.app.google/SshjMRivNZE564hw7" target="_blank" class="btn btn-primary">Időpontfoglalás</a>                        <a href="tel:+36702856630" class="btn btn-secondary">Hívás: 70/285-66-30</a>                    </div>                </div>            </div>        </div>    </section>
+    <section class="gallery-section">        <h2 class="section-title">Munkáim</h2>        <p class="section-subtitle">Büszkeségeim a szalonból. Egészséges, stílusos és megújult frizurák. Inspirálódj belőlük a következő találkozásunk előtt!</p>                <div class="slider-container">            <button class="slider-arrow arrow-left" id="prevBtn">❮</button>            <button class="slider-arrow arrow-right" id="nextBtn">❯</button>                        <div class="slider-clip">                <div class="slider-wrapper" id="sliderWrapper">                    <div class="slide"><div class="image-box"><img src="kep1.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>                    <div class="slide"><div class="image-box"><img src="kep2.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>                    <div class="slide"><div class="image-box"><img src="kep3.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>                    <div class="slide"><div class="image-box"><img src="kep4.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>                    <div class="slide"><div class="image-box"><img src="kep5.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>                    <div class="slide"><div class="image-box"><img src="kep6.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>                    <div class="slide"><div class="image-box"><img src="kep7.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>                    <div class="slide"><div class="image-box"><img src="kep8.jpg" alt="Fodrász munka - Blanco Hair Salon"></div></div>                </div>            </div>                        <div class="slider-dots" id="sliderDots"></div>        </div>
+        <div class="container">            <div class="gallery-cta-group">                <a href="https://calendar.app.google/SshjMRivNZE564hw7" target="_blank" class="btn btn-primary">Időpontfoglalás</a>                <a href="tel:+36702856630" class="btn btn-secondary">Hívás: 70/285-66-30</a>            </div>        </div>    </section>
+    <section class="map-section">        <div class="container">            <div class="map-wrapper">                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2729.4357738221844!2d16.830604176882203!3d46.84501254026528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47692caf9b92ed5f%3A0x6b40bd708451bcba!2sZalaegerszeg%2C%20Ola%20u.%204%2C%208900!5e0!3m2!1shu!2shu!4v1716900000000!5m2!1shu!2shu" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            </div>        </div>    </section>
+    <section class="info-section">        <div class="container">            <div class="info-grid">                <div class="info-card">                    <h2>Üzletünk</h2>                    <p>8900 Zalaegerszeg,<br>Ola utca 4.</p>                </div>                <div class="info-card">                    <h2>Kapcsolat</h2>                    <p><a href="tel:+36702856630">70/285-66-30</a></p>                    <p><a href="mailto:blanka.osi@gmail.com">blanka.osi@gmail.com</a></p>                </div>                <div class="info-card">                    <h2>Nyitvatartás</h2>                    <p>Bejelentkezés alapján<br>a fenti gombra kattintva.</p>                </div>            </div>        </div>    </section>
+    <footer>        <div class="container">            <div class="footer-social">                <a href="https://www.facebook.com/profile.php?id=61576194103543" target="_blank" class="link-facebook-footer">                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/></svg>                    Kövess minket Facebookon                </a>            </div>            <p>© 2026 Blanco Hair Salon. Minden jog fenntartva.</p>        </div>    </footer>
+    <script>        const wrapper = document.getElementById('sliderWrapper');        const slides = document.querySelectorAll('.slide');        const prevBtn = document.getElementById('prevBtn');        const nextBtn = document.getElementById('nextBtn');        const dotsContainer = document.getElementById('sliderDots');                let currentIndex = 0;        let slidesToShow = window.innerWidth >= 768 ? 3 : 1;        let maxIndex = slides.length - slidesToShow;
+        window.addEventListener('DOMContentLoaded', () => {            if (window.innerWidth < 768) {                const target = document.getElementById('scrolled-target');                if (target) {                    setTimeout(() => {                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });                    }, 300);                }            }            setSlideWidths();            createDots();        });
+        window.addEventListener('resize', () => {            slidesToShow = window.innerWidth >= 768 ? 3 : 1;            maxIndex = slides.length - slidesToShow;            if(currentIndex > maxIndex) currentIndex = maxIndex;            setSlideWidths();            updateSlider();            createDots();        });
+
+        function setSlideWidths() {            slides.forEach(slide => {                slide.style.minWidth = `${100 / slidesToShow}%`;            });        }
+
+        function createDots() {            dotsContainer.innerHTML = '';            const totalDots = window.innerWidth >= 768 ? Math.ceil(slides.length / 3) : slides.length;                        for (let i = 0; i < totalDots; i++) {                const dot = document.createElement('div');                dot.classList.add('dot');                if (i === 0) dot.classList.add('active');                dot.addEventListener('click', () => {                    currentIndex = window.innerWidth >= 768 ? i * 3 : i;                    if(currentIndex > maxIndex) currentIndex = maxIndex;                    updateSlider();                });                dotsContainer.appendChild(dot);            }        }
+
+        function updateSlider() {            const percent = currentIndex * (100 / slidesToShow);            wrapper.style.transform = `translateX(-${percent}%)`;                        const dots = document.querySelectorAll('.dot');            dots.forEach(dot => dot.classList.remove('active'));                        const activeDotIndex = window.innerWidth >= 768 ? Math.floor(currentIndex / 3) : currentIndex;            if(dots[activeDotIndex]) dots[activeDotIndex].classList.add('active');        }
+
+        nextBtn.addEventListener('click', () => {            if (currentIndex < maxIndex) {                currentIndex += window.innerWidth >= 768 ? 3 : 1;                if(currentIndex > maxIndex) currentIndex = maxIndex;            } else {                currentIndex = 0;            }            updateSlider();        });
+
+        prevBtn.addEventListener('click', () => {            if (currentIndex > 0) {                currentIndex -= window.innerWidth >= 768 ? 3 : 1;                if(currentIndex < 0) currentIndex = 0;            } else {                currentIndex = maxIndex;            }            updateSlider();        });
+
+        setSlideWidths();        createDots();    </script></body></html>
